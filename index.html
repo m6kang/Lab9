@@ -123,10 +123,15 @@
     }
     let globalErrorBtn = errorBtns[10];
     globalErrorBtn.addEventListener('click', () => {
-      throw new GlobalError('Global Error');
+      try {
+        throw new GlobalError('Global Error');
+      }
+      catch(err) {
+      }
     });
     window.onerror = function(message) {
       console.log('Global Error');
+      return true;
     }
   </script>
 </body>
