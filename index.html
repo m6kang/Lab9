@@ -62,11 +62,72 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (err) {
+        console.error("Error: Calculations failed")
+      } finally {
+        console.log("Finally")
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     // TODO - Make buttons functional
+    let consoleLogBtn = errorBtns[0];
+    consoleLogBtn.addEventListener('click', () => {
+      console.log('Console Log Demo');
+    });
+    let consoleErrorBtn = errorBtns[1];
+    consoleErrorBtn.addEventListener('click', () => {
+      console.error('Console Error Demo');
+    });
+    let consoleDirBtn = errorBtns[2];
+    consoleDirBtn.addEventListener('click', () => {
+      console.dir(document.querySelector('fieldset'));
+    });
+    let consoleDirXMLBtn = errorBtns[3];
+    consoleDirXMLBtn.addEventListener('click', () => {
+      console.dirxml(document.querySelector('section'));
+    });
+    let consoleGroupStartBtn = errorBtns[4];
+    consoleGroupStartBtn.addEventListener('click', () => {
+      console.group('Console Group Start');
+    });
+    let consoleGroupEndBtn = errorBtns[5];
+    consoleGroupEndBtn.addEventListener('click', () => {
+      console.groupEnd('Console Group End');
+    });
+    let consoleTableBtn = errorBtns[6];
+    consoleTableBtn.addEventListener('click', () => {
+      console.table([{test: 'test 1'}, {test: 'test 2'}]);
+    });
+    let consoleTimeBtn = errorBtns[7];
+    consoleTimeBtn.addEventListener('click', () => {
+      console.time('Timer');
+    });
+    let consoleTimeEndBtn = errorBtns[8];
+    consoleTimeEndBtn.addEventListener('click', () => {
+      console.timeEnd('Timer');
+    });
+    let consoleTraceBtn = errorBtns[9];
+    consoleTraceBtn.addEventListener('click', () => {
+      const start = () => {end();};
+      const end = () => {console.trace();};
+      start();
+    });
+    class GlobalError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'GlobalError';
+      }
+    }
+    let globalErrorBtn = errorBtns[10];
+    globalErrorBtn.addEventListener('click', () => {
+      throw new globalError('Global Error');
+    });
+    window.onerror = function(message) {
+      console.log('Global Error');
+    }
   </script>
 </body>
 </html>
