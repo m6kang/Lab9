@@ -62,13 +62,8 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      try {
-        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-      } catch (err) {
-        console.error("Error")
-      } finally {
-        console.log("Finally")
-      }
+      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+     
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -127,6 +122,10 @@
         throw new GlobalError('Global Error');
       }
       catch(err) {
+        console.error(err);
+      }
+      finally {
+         console.log('finally');
       }
     });
     window.onerror = function(message) {
